@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/models/movie_model.dart';
+import 'package:movie_app/pages/details/movie_details_page.dart';
 import 'package:movie_app/widgets/custom_card_thumbnail.dart';
+
 
 class NowPlayingList extends StatefulWidget {
   final List<Movie> movies;
@@ -33,8 +35,20 @@ class _NowPlayingListState extends State<NowPlayingList> {
                   ? maxItems
                   : widget.movies.length,
               itemBuilder: (context, index) {
-                return CustomCardThumbnail(
-                  imageAsset: widget.movies[index].posterPath,
+                return GestureDetector(
+                  onTap: () {
+                    // Navegar para a página de detalhes do filme ao clicar
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            MovieDetailsPage(movie: widget.movies[index]),
+                      ),
+                    );
+                  },
+                  child: CustomCardThumbnail(
+                    imageAsset: widget.movies[index].posterPath, onTap: () {  },
+                  ),
                 );
               },
             )),

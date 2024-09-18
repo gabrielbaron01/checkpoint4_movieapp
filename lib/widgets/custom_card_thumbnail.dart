@@ -4,7 +4,7 @@ import 'package:movie_app/common/utils.dart';
 class CustomCardThumbnail extends StatelessWidget {
   final String imageAsset;
 
-  const CustomCardThumbnail({super.key, required this.imageAsset});
+  const CustomCardThumbnail({super.key, required this.imageAsset, required Null Function() onTap});
 
   @override
   Widget build(BuildContext context) {

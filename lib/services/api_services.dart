@@ -51,4 +51,17 @@ class ApiServices {
     }
     throw Exception('failed to load now playing movies');
   }
+  Future<Result> getSearchedMovie(String searchText) async {
+    final endPoint = 'search/movie?query=$searchText';
+    final url = '$baseUrl$endPoint';
+    final response = await http.get(Uri.parse(url), headers: {
+      'Authorization':
+          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NTAyYjhjMDMxYzc5NzkwZmU1YzBiNGY5NGZkNzcwZCIsInN1YiI6IjYzMmMxYjAyYmE0ODAyMDA4MTcyNjM5NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.N1SoB26LWgsA33c-5X0DT5haVOD4CfWfRhwpDu9eGkc'
+    });
+    if (response.statusCode == 200) {
+      final movies = Result.fromJson(jsonDecode(response.body));
+      return movies;
+    }
+    throw Exception('failed to load  search movie ');
+  }
 }
